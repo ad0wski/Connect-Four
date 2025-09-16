@@ -1,11 +1,22 @@
-plansza = [[" ", " ", " ", " ", " ", " ", " ", " "],
-           [" ", " ", " ", " ", " ", " ", " ", " "],
-           [" ", " ", " ", " ", " ", " ", " ", " "],
-           [" ", " ", " ", " ", " ", " ", " ", " "],
-           [" ", " ", " ", " ", " ", " ", " ", " "],
-           [" ", " ", " ", " ", " ", " ", " ", " "]]
+plansza = [[" ", " ", " ", " ", " ", " ", " "],
+           [" ", " ", " ", " ", " ", " ", " "],
+           [" ", " ", " ", " ", " ", " ", " "],
+           [" ", " ", " ", " ", " ", " ", " "],
+           [" ", " ", " ", " ", " ", " ", " "],
+           [" ", " ", " ", " ", " ", " ", " "]]
 
-aktualnyGracz = "X"
+zasady = """
+Zasady gry: Connect Four 🎮
+
+1. Gra odbywa się na planszy 7 kolumn x 6 wierszy.
+2. Gracze na zmianę wrzucają swoje pionki: X lub 0.
+3. Aby wykonać ruch, wybierz numer kolumny (1–7).
+4. Pionek zawsze spada na najniższe wolne miejsce w danej kolumnie.
+5. Wygrywa gracz, który jako pierwszy ułoży 4 swoje symbole w rzędzie:
+   poziomo, pionowo lub po skosie.
+6. Jeśli cała plansza się zapełni i nikt nie wygrał — jest remis.
+"""
+print(zasady)
 
 def zmianaGracza(aktualnyGracz):
     if aktualnyGracz == "X":
@@ -75,3 +86,23 @@ def czyWygrana(plansza, aktualnyGracz):
                 return True
     return False
 
+ruchy = 0
+aktualnyGracz = "X"
+
+while True:
+    ruchy += 1
+
+    wyswietlaniePlanszy(plansza)
+    ruchGracza(aktualnyGracz, plansza)
+
+    if czyWygrana(plansza, aktualnyGracz) == True:
+        wyswietlaniePlanszy(plansza)
+        print(f"\nWYGRYWA {aktualnyGracz}! \n")
+        break
+
+    if ruchy == 42:
+        wyswietlaniePlanszy(plansza)
+        print(f"\nREMIS! \n")
+        break
+    
+    aktualnyGracz = zmianaGracza(aktualnyGracz)
